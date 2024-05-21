@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
             if (worker.verfied === true) {
                 res.status(201).json({ messege: "Login successful", token: token, verfied: worker.verfied });
             } else {
-                res.status(401).json({ messege: "User not verified, please contact support.", verfied: worker.verfied });
+                res.status(201).json({ messege: "User not verified, please contact support.", verfied: worker.verfied });
             }
 
         }
