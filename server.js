@@ -5,6 +5,7 @@ require('dotenv').config({ path: './.env' });
 const express = require('express');
 const cors = require('cors');
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 //Inställningar för express
 const app = express();
 const port = process.env.PORT;
