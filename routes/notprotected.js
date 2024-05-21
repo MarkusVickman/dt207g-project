@@ -35,13 +35,13 @@ router.get("/menu", async (req, res) => {
 router.post("/order/add", /*authtenticateToken,*/ async (req, res) => {
     
     let indexId = req.body.indexId;
-    await Menu.findById(indexId);
+    let menu = await Menu.findById(indexId);
     
     //lägger till data till mongoDb servern med krav att schema workSchema ska följas från post-anropet om webbadress/api/add anropas. Skickar felmeddelande om fel uppstår hos databasen.  
     let newOrder = {
         email: req.body.email,
-        foodName: indexId.foodName,
-        price: indexId.price
+        foodName: menu.foodName,
+        price: menu.price
     };
 
     let error = {};

@@ -50,10 +50,13 @@ router.post("/login", async (req, res) => {
         if(!isPasswordAMatch) {
             return res.status(401).json({error : "Incorrect username, password or both."})
         } else {
+            
+            let worker = await Worker.findById(username);
+
             //Create JWT
             const payload = { username: username };
             const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: `1h`});
-            res.status(201).json({ messege: "Login successful", token: token });
+            res.status(201).json({ messege: "Login successful", token: token, verfied: worker.verfied });
         }
 
     } catch (error) {
