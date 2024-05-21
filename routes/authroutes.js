@@ -51,16 +51,16 @@ router.post("/login", async (req, res) => {
             return res.status(401).json({ error: "Incorrect username, password or both." })
         } else {
 
-            let worker = await Worker.findById(username);
+            //let worker = await Worker.findById(username);
 
             //Create JWT
             const payload = { username: username };
             const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: `1h` });
-            if (worker.verfied === true) {
-                res.status(201).json({ messege: "Login successful", token: token, verfied: worker.verfied });
-            } else {
-                res.status(201).json({ messege: "User not verified, please contact support.", verfied: worker.verfied });
-            }
+            //if (worker.verfied === true) {
+                res.status(201).json({ messege: "Login successful", token: token/*, verfied: worker.verfied */});
+            //} else {
+             //   res.status(201).json({ messege: "User not verified, please contact support.", verfied: worker.verfied });
+            //}
 
         }
 
