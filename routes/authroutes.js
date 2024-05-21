@@ -43,20 +43,25 @@ router.post("/login", async (req, res) => {
         const worker = await Worker.findOne({ username });
 
         if (!worker) {
-            return res.status(401).json({error : "Incorrect username, password or both."})
+            return res.status(401).json({ error: "Incorrect username, password or both." })
         }
 
         const isPasswordAMatch = await worker.comparePassword(password);
-        if(!isPasswordAMatch) {
-            return res.status(401).json({error : "Incorrect username, password or both."})
+        if (!isPasswordAMatch) {
+            return res.status(401).json({ error: "Incorrect username, password or both." })
         } else {
-            
+
             let worker = await Worker.findById(username);
 
             //Create JWT
             const payload = { username: username };
-            const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: `1h`});
-            res.status(201).json({ messege: "Login successful", token: token, verfied: worker.verfied });
+            const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: `1h` });
+            if (worker.verfied === true) {
+                res.status(201).json({ messege: "Login successful", token: token, verfied: worker.verfied });
+            } else {
+                res.status(401).json({ messege: "User not verified, please contact support.", verfied: worker.verfied });
+            }
+
         }
 
     } catch (error) {
