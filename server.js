@@ -46,7 +46,6 @@ app.get("/check", (req, res) => {
     res.status(200).json({ message: "Api-server is up and running."});
 });
 
-
 //funktionen som säkerställer att anropen har en giltig JWT-token med som authorization: bearer token. Returnerar även payload(användarnamn) som req. 
 function authtenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -65,4 +64,3 @@ function authtenticateToken(req, res, next) {
         next();
     })
 }
-

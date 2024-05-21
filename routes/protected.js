@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 /*const { type } = require('express/lib/response');
 
 //Ansluter till mongoDB.
@@ -98,7 +99,7 @@ router.put('/menu/edit', async (req, res) => {
 });
 
 //routes för borttagning rader från menyn där id skickas med som parameter
-router.delete("menu/delete/:id", /*authtenticateToken,*/ async (req, res) => {
+router.delete("/menu/delete/:id", /*authtenticateToken,*/ async (req, res) => {
     //tar bort data från mongoDb-servern när förfrågan till webbadress/api/cv görs. Skickar felmeddelande om fel uppstår hos databasen.
     let indexId = req.params.id;
 
@@ -217,7 +218,6 @@ router.delete("/user/delete", /*authtenticateToken,*/ async (req, res) => {
         }
     }
 });
-
 
 
 
