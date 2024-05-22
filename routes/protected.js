@@ -183,7 +183,7 @@ router.get("/user"/*, authtenticateToken*/, async (req, res) => {
 router.put("/user/verify",/* authtenticateToken,*/ async (req, res) => {
     //tar bort data från mongoDb-servern när förfrågan till webbadress/api/cv görs. Skickar felmeddelande om fel uppstår hos databasen.
     let adminUsername = req.username.username;
-    let workerId = req.params.id;
+    let workerId = req.body.indexId;
     //Felhantering om uppgifter saknas.
     if (!adminUsername) {
         res.status(400).json(error);
