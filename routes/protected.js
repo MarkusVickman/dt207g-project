@@ -63,7 +63,6 @@ router.put('/menu/edit', async (req, res) => {
 
     let editMenu = {
         username: req.username.username,
-        menyType: req.body.menyType,
         foodName: req.body.foodName,
         description: req.body.description,
         price: req.body.price,
@@ -84,7 +83,7 @@ router.put('/menu/edit', async (req, res) => {
         res.status(400).json(error);
     }
     //Det räckar att ett värde uppdateras
-    else if (!editMenu.menyType && !editMenu.editMenu && !editMenu.foodName && !editMenu.description && !editMenu.price) {
+    else if (!editMenu.foodName && !editMenu.description && !editMenu.price) {
         res.status(400).json(error);
     }
     //värdet skrivs in på rätt index i rätt kolomn i databasen.
