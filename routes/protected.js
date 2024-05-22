@@ -65,8 +65,8 @@ router.put('/menu/edit', async (req, res) => {
         username: req.username.username,
         foodName: req.body.foodName,
         description: req.body.description,
-        price: req.body.price,
-        created: Date.now
+        price: req.body.price
+        //created: Date.now
     };
 
     let error = {
