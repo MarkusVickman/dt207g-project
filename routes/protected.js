@@ -67,10 +67,7 @@ router.put('/menu/edit', async (req, res) => {
         foodName: req.body.foodName,
         description: req.body.description,
         price: req.body.price,
-        created: {
-            type: date, 
-            default: Date.now
-        }
+        created: new Date
     };
 
     let error = {
