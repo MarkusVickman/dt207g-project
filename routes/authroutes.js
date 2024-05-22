@@ -49,7 +49,11 @@ router.post("/login", async (req, res) => {
         const isPasswordAMatch = await worker.comparePassword(password);
         if (!isPasswordAMatch) {
             return res.status(401).json({ error: "Incorrect username, password or both." })
-        } else {
+        } 
+        if (worker.verified === false){
+            return res.status(401).json({ error: "Vänligen prata med admin eller din närmaste chef för att få inloggningsrättigheterna bekräftade." })
+        }
+        else {
 
             //let worker = await Worker.findById(username);
 
