@@ -68,10 +68,9 @@ router.put('/menu/edit', async (req, res) => {
         description: req.body.description,
         price: req.body.price,
         created: {
-            type: Date,
+            type: date, 
             default: Date.now
         }
-        
     };
 
     let error = {
@@ -138,9 +137,9 @@ router.get("/order", /*authtenticateToken,*/ async (req, res) => {
 //routes för admin ska kunna markera ordrar som klara och upphämtade
 router.put("/order/completed",/* authtenticateToken,*/ async (req, res) => {
 
-    let orderId = req.body.indexId; 
+    let orderId = req.body.indexId;
     //värdet skrivs in på rätt index i rätt kolomn i databasen.
-    if (orderId){
+    if (orderId) {
         try {
             await Order.findByIdAndUpdate(orderId, { completed: true });
             return res.status(200).json({ Success: "Put data updated in database." });
