@@ -32,7 +32,7 @@ router.get("/menu", async (req, res) => {
 // Följande routes är för ordrar till restaurangen
 
 //routes för att lägga en order. Uppgifterna hämtas från databas servern för minskad risk för pris manupulation
-router.post("/order/add", /*authtenticateToken,*/ async (req, res) => {
+router.post("/checkout", /*authtenticateToken,*/ async (req, res) => {
     
     //lägger till data till mongoDb servern med krav att schema workSchema ska följas från post-anropet om webbadress/api/add anropas. Skickar felmeddelande om fel uppstår hos databasen.  
     let newOrder = {
