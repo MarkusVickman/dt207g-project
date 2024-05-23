@@ -124,8 +124,8 @@ router.delete("/menu/delete/:id", /*authtenticateToken,*/ async (req, res) => {
 //routes för att lägga en order. Uppgifterna hämtas från databas servern för minskad risk för pris manupulation
 router.get("/order", /*authtenticateToken,*/ async (req, res) => {
     try {
-        await Order.find();
-        return res.json({ Success: "Post data stored in database." });
+        let result = await Order.find();
+        return res.json(result);
     } catch (error) {
         return res.status(500).json({ error: "Database error. " + error });
     }

@@ -47,7 +47,7 @@ router.post("/checkout", /*authtenticateToken,*/ async (req, res) => {
     if (!newOrder.email || !newOrder.foods || !newOrder.userName ) {
         error = {
             message: "Parameters missing in the request.",
-            detail: "Post request most include email and indexId",
+            detail: "Post request most include email and userName",
             https_response: {
                 message: "Bad Request",
                 code: 400
