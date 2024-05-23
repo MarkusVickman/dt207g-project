@@ -170,7 +170,7 @@ router.get("/user"/*, authtenticateToken*/, async (req, res) => {
 
     else {
         try {
-            let result = await Worker.find(userName);
+            let result = {result: false};
             return res.json(result);
 
         } catch (error) {
