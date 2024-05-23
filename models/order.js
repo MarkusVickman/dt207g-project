@@ -6,12 +6,8 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    foodName: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
+    foods: {
+        type: Array,
         required: true
     },
     created: {

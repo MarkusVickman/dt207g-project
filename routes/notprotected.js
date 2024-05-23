@@ -34,20 +34,16 @@ router.get("/menu", async (req, res) => {
 //routes för att lägga en order. Uppgifterna hämtas från databas servern för minskad risk för pris manupulation
 router.post("/order/add", /*authtenticateToken,*/ async (req, res) => {
     
-    let indexId = req.body.indexId;
-    let menu = await Menu.findById(indexId);
-    
     //lägger till data till mongoDb servern med krav att schema workSchema ska följas från post-anropet om webbadress/api/add anropas. Skickar felmeddelande om fel uppstår hos databasen.  
     let newOrder = {
         email: req.body.email,
-        foodName: menu.foodName,
-        price: menu.price
+        foods: req.body.foods
     };
 
     let error = {};
 
     //Felhantering om uppgifter saknas
-    if (!newOrder.email || !newOrder.foodName || !newOrder.price ) {
+    if (!newOrder.email || !newOrder.foods) {
         error = {
             message: "Parameters missing in the request.",
             detail: "Post request most include email and indexId",
