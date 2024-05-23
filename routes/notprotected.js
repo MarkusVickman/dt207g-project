@@ -36,6 +36,7 @@ router.post("/order/add", /*authtenticateToken,*/ async (req, res) => {
     
     //lägger till data till mongoDb servern med krav att schema workSchema ska följas från post-anropet om webbadress/api/add anropas. Skickar felmeddelande om fel uppstår hos databasen.  
     let newOrder = {
+        userName: req.body.userName,
         email: req.body.email,
         foods: req.body.foods
     };
@@ -43,7 +44,7 @@ router.post("/order/add", /*authtenticateToken,*/ async (req, res) => {
     let error = {};
 
     //Felhantering om uppgifter saknas
-    if (!newOrder.email || !newOrder.foods) {
+    if (!newOrder.email || !newOrder.foods || !newOrder.userName ) {
         error = {
             message: "Parameters missing in the request.",
             detail: "Post request most include email and indexId",
