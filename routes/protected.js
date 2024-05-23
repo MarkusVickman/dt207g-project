@@ -170,7 +170,7 @@ router.get("/user"/*, authtenticateToken*/, async (req, res) => {
 
     else {
         try {
-            let result = {result: false};
+            let result = {result: "notadmin"};
             return res.json(result);
 
         } catch (error) {
