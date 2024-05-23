@@ -147,6 +147,28 @@ router.put("/order/completed",/* authtenticateToken,*/ async (req, res) => {
 });
 
 
+//routes för att ta bort användare. Går bara att göra för admin-kontot med hjälp av användarnamnet som följer med JWT-token som payload och sen authentiseras i authtenticateToken-funktionen
+router.delete("/order/delete/:id", /*authtenticateToken,*/ async (req, res) => {
+    //tar bort data från mongoDb-servern när förfrågan till webbadress/api/cv görs. Skickar felmeddelande om fel uppstår hos databasen.
+    let indexId = req.params.id;
+
+    //Felhantering om uppgifter saknas.
+    if (!indexId) {
+        res.status(400).json(error);
+    }
+    //värdet skrivs in på rätt index i rätt kolomn i databasen.
+    else {
+        try {
+            await Order.findByIdAndDelete(indexId);
+            return res.json({ Success: "Delete data removed from database." });
+        } catch (error) {
+            return res.status(500).json({ error: "Database error. " + error });
+        }
+    }
+});
+
+
+
 
 
 
