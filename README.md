@@ -1,4 +1,5 @@
-# Api - Ett restaurang api för att administrera en restaurangsida
+# Projekt-API i kursen Dt207G - Backend-baserad webbutveckling - Ett restaurang api för att administrera en restaurangwebbplats
+
 Apit kan hantera inloggningar för admin, skicka och ta emot ordrar, hämta och redigera i menyn. Det går också att hantera inloggningar för flera användare till adminsidan.
 Detta repository innehåller kod för ett REST API byggt med Express. Apiet kan ta emot CRUD (Create, Read, Update, Delete).
 
@@ -194,3 +195,9 @@ En menyrad ändras genom att JSON skickas med följande struktur (fälten är va
 "created": ""
 }
 ```
+
+## Markus Vickman
+Jag läser till en högskoleexamen i datateknik med inriktning webbutveckling på mittuniversitet.
+
+### Student ID: mavi2302
+
