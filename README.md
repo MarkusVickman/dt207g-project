@@ -1,5 +1,5 @@
 # Api - Ett restaurang api för att administrera en restaurangsida
-Apit kan hantera inloggningar för admin, skicka och ta emot ordrar, hämta och redigera i menyn. Det går också att handera inloggningar för flera användare till adminsidan.
+Apit kan hantera inloggningar för admin, skicka och ta emot ordrar, hämta och redigera i menyn. Det går också att hantera inloggningar för flera användare till adminsidan.
 Detta repository innehåller kod för ett REST API byggt med Express. Apiet kan ta emot CRUD (Create, Read, Update, Delete).
 
 ## Testwebbplats
