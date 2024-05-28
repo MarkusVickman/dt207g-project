@@ -1,21 +1,13 @@
+//Används där inte authentisering krävs. Som att hämta menyn och beställa mat
+
 const express = require("express");
 const router = express.Router();
 
-
-
-
-
-
-//Hämtar metoder och mongooseschema för inloggning, registrering och cv
+//Hämtar metoder och mongooseschema för meny och beställningar
 const Menu = require("../models/menu");
 const Order = require("../models/order");
 
-
-
-
-
-
-//routes för att hämta hela menyntill restauranen.
+//routes för att hämta hela menyn till restauranen.
 router.get("/menu", async (req, res) => {
     try {
         let result = await Menu.find();
@@ -27,14 +19,10 @@ router.get("/menu", async (req, res) => {
 });
 
 
-
-
-// Följande routes är för ordrar till restaurangen
-
-//routes för att lägga en order. Uppgifterna hämtas från databas servern för minskad risk för pris manupulation
+// Följande routes är för ordrar till restaurangen. routes för att lägga en order.
 router.post("/checkout", /*authtenticateToken,*/ async (req, res) => {
-    
-    //lägger till data till mongoDb servern med krav att schema workSchema ska följas från post-anropet om webbadress/api/add anropas. Skickar felmeddelande om fel uppstår hos databasen.  
+
+    //lägger till data till mongoDb servern med objekt for ordern. Foods är en array av objekt.  
     let newOrder = {
         userName: req.body.userName,
         email: req.body.email,
@@ -55,7 +43,7 @@ router.post("/checkout", /*authtenticateToken,*/ async (req, res) => {
         }
         res.status(400).json(error);
     }
-    //Om allt är korrekt körs frågan till mongoDg-databasen för att lagra det nya cv
+    //Om allt är korrekt körs frågan till mongoDg-databasen för att lagra ordern
     else {
         try {
             await Order.create(newOrder);

@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-//mongoose-schema för användare. Skapande datum skapas automatiskt
+//mongoose-schema för användare. Skapande datum skapas automatiskt för att veta när kontot är skapat och även verified används för att admin ska kunna bekräfta tillgång
 const WorkerSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -31,7 +31,6 @@ WorkerSchema.pre("save", async function (next) {
             const hashedPassword = await bcrypt.hash(this.password, 10);
             this.password = hashedPassword;
         }
-
         next();
     } catch (error) {
         next(error);
@@ -47,6 +46,7 @@ WorkerSchema.methods.comparePassword = async function (password) {
     }
 };
 
+//Modellen Worker exporteras
 const Worker = mongoose.model("Worker", WorkerSchema);
 module.exports = Worker;
 

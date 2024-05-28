@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// mongoose-schema för cv-inlägg
+// mongoose-schema för menyinlägg/menyobjekt. För att kunna veta när menyn ändrats finns created med också
 const MenuSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -28,6 +28,6 @@ const MenuSchema = new mongoose.Schema({
     }
 });
 
-// Skapa en model
+// Skapa en mongoose model för Menu och exportera modulen
 const Menu = mongoose.model('Menu', MenuSchema);
 module.exports = Menu;

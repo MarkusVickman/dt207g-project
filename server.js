@@ -9,15 +9,14 @@ const jwt = require("jsonwebtoken");
 //Inställningar för express
 const app = express();
 const port = process.env.PORT;
+//deklarerar routes
 const authRoutes = require("./routes/authroutes");
 const protected = require("./routes/protected");
 const notprotected = require("./routes/notprotected");
 
-//stöd för ta json-format och 
+//stöd för ta json-format och tillåter tillgång från andra sidor
 app.use(express.json());
 app.use(cors());
-
-
 
 //Ansluter till mongoDB.
 mongoose.connect(process.env.DATABASE).then(() => {
@@ -26,20 +25,19 @@ mongoose.connect(process.env.DATABASE).then(() => {
     console.log("Error connecting to database: " + error);
 })
 
-
-
-
-//Välkomst meddelande om webbadress/api anropas
-app.use('/account', authRoutes);
-
-app.use("/", notprotected);
-
-app.use("/protected", authtenticateToken, protected);
-
 //Startar servern
 app.listen(port, () => {
     console.log('Server is running on port: ' + port);
 });
+
+//authRoutes används för att logga in och registrera användare
+app.use('/account', authRoutes);
+
+//Används där inte authentisering krävs
+app.use("/", notprotected);
+
+//Används för skyddade routes funktionen authenticateToken() används för att verifiera token innan tillgång ges.
+app.use("/protected", authtenticateToken, protected);
 
 //Endast för att kontrollera om servern är igång
 app.get("/check", (req, res) => {
@@ -54,12 +52,11 @@ function authtenticateToken(req, res, next) {
     if (token == null || token.lenght === 0) {
         return res.status(401).json({ message: "Not authorized: Token is missing." });
     }
-
+    //verifierar token returnerar error eller skickar med req.username
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, username) => {
         if (err) {
             return res.status(403).json({ message: "Not authorized: Wrong token." })
         }
-
         req.username = username;
         next();
     })

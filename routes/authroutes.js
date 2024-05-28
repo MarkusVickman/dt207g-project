@@ -1,19 +1,14 @@
+//authRoutes används för att logga in och registrera användare
+
 //const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
-//Ansluter till mongoDB.
-/*mongoose.connect(process.env.DATABASE).then(() => {
-    console.log("Connected to MongoDB");
-}).catch((error) => {
-    console.log("Error connecting to database: " + error); 
-})*/
-
 //Hämtar metoder och mongooseschema för inloggning och registrering
 const Worker = require("../models/user");
 
-//routes för registrering av användare som lagrar användaren i databasen med hjälp av metoden för new User
+//routes för registrering av användare som lagrar användaren i databasen med hjälp av metoden för new User, returnerar felmeddelande vid fel
 router.post("/register", async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -49,23 +44,16 @@ router.post("/login", async (req, res) => {
         const isPasswordAMatch = await worker.comparePassword(password);
         if (!isPasswordAMatch) {
             return res.status(401).json({ error: "Incorrect username, password or both." })
-        } 
-        if (worker.verified === false){
+        }
+        if (worker.verified === false) {
             return res.status(401).json({ error: "Vänligen prata med admin eller din närmaste chef för att få inloggningsrättigheterna bekräftade." })
         }
         else {
 
-            //let worker = await Worker.findById(username);
-
-            //Create JWT
+            //skapar JWT-token och payload som används i andra funktioner
             const payload = { username: username };
             const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: `1h` });
-            //if (worker.verfied === true) {
-                res.status(201).json({ messege: "Login successful", token: token/*, verfied: worker.verfied */});
-            //} else {
-             //   res.status(201).json({ messege: "User not verified, please contact support.", verfied: worker.verfied });
-            //}
-
+            res.status(201).json({ messege: "Login successful", token: token });
         }
 
     } catch (error) {
